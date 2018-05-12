@@ -10,8 +10,11 @@ const errorMiddleware = require('./middlewares/error')
 
 const port = process.env.PORT || 3000
 const app = express()
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+const handleConnections = require('./utils/handleConnections')
 
-const DIST_DIR = path.join(__dirname, 'dist')
+const DIST_DIR = path.join(__dirname, '..','dist')
 
 app.use(express.static(DIST_DIR))
 
@@ -22,7 +25,7 @@ app.use('/', (req, res) => {
 })
 app.use(errorMiddleware)
 
-app.listen(port, () => {
-  // eslint-disable-next-line
-    console.log('Express running on http://localhost:3000')
+server.listen(port, () => {
+  handleConnections(io)
+   console.log('Express running on http://localhost:3000')
 })

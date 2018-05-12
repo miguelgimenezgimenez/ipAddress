@@ -1,3 +1,4 @@
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -49,4 +50,10 @@ module.exports = {
   },
   devtool: 'eval-source-map',
 
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './public/index.html',
+      filename: './index.html'
+    })
+  ]
 }
