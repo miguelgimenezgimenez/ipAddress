@@ -8,7 +8,7 @@ const React = require('react')
 const routes = require('./routes')
 const errorMiddleware = require('./middlewares/error')
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
@@ -27,5 +27,5 @@ app.use(errorMiddleware)
 
 server.listen(port, () => {
   handleConnections(io)
-   console.log('Express running on http://localhost:3000')
+   console.log('Express running on http://localhost:8000')
 })

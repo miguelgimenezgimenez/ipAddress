@@ -8,7 +8,7 @@ export default class App extends Component {
   }
 
   initSocket () {
-    const socket = io('http://localhost:3000')
+    const socket = io('http://localhost:8000')
 
     socket.emit('chat message', 'aasdasdasdasdasadsasfrqw')
     socket.on('connect', () => {
