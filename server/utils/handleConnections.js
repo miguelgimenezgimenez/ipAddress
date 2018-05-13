@@ -1,22 +1,14 @@
-let ipConnections = {}
-const _ = require('lodash')
 
 const handleConnections = (io) => {
+  const ipConnections = {}
+
   io.on('connection', (socket) => {
     const ipAddress = socket.request.connection.remoteAddress
     const { id } = socket
-    ipConnections[ipAddress] = id
-    io.emit('connectionsUpdated', ipConnections)
-
+    ipConnections[id] = ipAddress
+    socket.broadcast.emit('connectionsUpdated', ipConnections)
     socket.on('disconnect', () => {
-      ipConnections = _.reduce(io.sockets.connected, (curr, acc, key) => {
-        const currentIps = Object.values(ipConnections)
-        const index = currentIps.indexOf(key)
-        if (index >= 0) {
-          curr[currentIps[index]] = key
-        }
-        return curr
-      }, {})
+      delete ipConnections[socket.id]
       socket.broadcast.emit('connectionsUpdated', ipConnections)
     })
   })
