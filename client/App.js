@@ -9,12 +9,10 @@ export default class App extends Component {
 
   initSocket () {
     const socket = io('http://localhost:8000')
-
-    socket.emit('chat message', 'aasdasdasdasdasadsasfrqw')
-    socket.on('connect', () => {
-      console.log('connected')
+    socket.on('connectionsUpdated', (msg) => {
+      console.log(msg)
     })
-    console.log('mounteweed', socket)
+    socket.emit('message', 'message')
   }
 
   render () {
