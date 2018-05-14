@@ -8,8 +8,7 @@ const setConnectionsList = (state, activeConnections) => {
   const list = keyBy(activeConnections, connection => connection.ip)
 
   return { ...state,
-    list,
-    loading: false
+    list
   }
 }
 

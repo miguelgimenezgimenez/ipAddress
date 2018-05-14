@@ -1,7 +1,7 @@
 #  IpAdressCodeAssessment
 
 
-Deployed project at http://ipAddress/miguelgimenez.tech (maybe its not up yet so you can use http://159.65.90.211:8000/ instead)
+Deployed project at http://ipAddress/miguelgimenez.tech 
 
 ### Running the project
 
@@ -42,8 +42,7 @@ and also using ipInfo api to get the location of the ipAdress I could have just 
  
  But decided to add a bit of complexity to the project, by getting the ipInfo from ipInfo api,  the reason this function doesnt dispatch an action is because it doesnt interact with the store directly, so I thought it didnt have to interact with redux.
 
-
-
+Also its only showing unique ipAddresses
 
 
 
