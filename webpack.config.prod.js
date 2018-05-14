@@ -1,60 +1,64 @@
-const webpack = require('webpack')
-const path = require('path')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
-module.exports = {
-  context: `${__dirname}/src`,
-  entry: './index.js',
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+const HtmlWebPackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
 
-  },
-  resolve: {
-    extensions: ['.js', '.json']
-  },
-  stats: {
-    colors: true,
-    reasons: true,
-    chunks: true
+module.exports = {
+  entry: './client/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
-    loaders: [
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        exclude: /node_modules/,
-        loader: 'file-loader?publicPath=/'
-      },
-      {
-        test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&sourceMap&localIdentName=[name]_[local]_[hash:base64:5]',
-          'sass-loader?sourceMap'
-        ]
-      },
-      {
-        test: /\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel-loader']
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
       }
+    },
+    {
+      test: /\.html$/,
+      use: [{
+        loader: 'html-loader',
+        options: {
+          minimize: true
+        }
+      }]
+    },
+    {
+      test: /\.s?css$/,
+      use: [{
+        loader: 'style-loader'
+      },
+
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          sourceMap: true,
+          localIdentName: '[name]_[local]_[hash:base64:5]'
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true
+        }
+      }
+      ]
+    }
     ]
   },
-  devServer: {
-    historyApiFallback: true
-  },
+  mode: 'development',
   devtool: 'eval-source-map',
 
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: `"${process.env.NODE_ENV || 'production'}"` }
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new HtmlWebPackPlugin({
+      template: './public/index.html',
+      filename: './index.html'
     }),
     new UglifyJSPlugin()
   ]

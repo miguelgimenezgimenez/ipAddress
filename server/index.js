@@ -1,12 +1,5 @@
-require('babel-register')
-
 const path = require('path')
 const express = require('express')
-const reactServer = require('react-dom/server')
-const React = require('react')
-
-const routes = require('./routes')
-const errorMiddleware = require('./middlewares/error')
 
 const port = process.env.PORT || 8000
 const app = express()
@@ -14,18 +7,16 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const handleConnections = require('./utils/handleConnections')
 
-const DIST_DIR = path.join(__dirname, '..','dist')
+const DIST_DIR = path.join(__dirname, '..', 'dist')
 
 app.use(express.static(DIST_DIR))
-
-app.use('/api', routes)
 
 app.use('/', (req, res) => {
   res.sendFile(path.join(DIST_DIR, 'index.html'))
 })
-app.use(errorMiddleware)
 
 server.listen(port, () => {
   handleConnections(io)
-   console.log('Express running on http://localhost:8000')
+  // eslint-disable-next-line
+  console.log(`listening on ${port}`)
 })

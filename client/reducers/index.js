@@ -1,5 +1,5 @@
-import photo from './photo'
+import connections from './connections'
 
 export default {
-  photo
+  connections
 }

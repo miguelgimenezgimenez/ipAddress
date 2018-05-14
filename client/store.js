@@ -1,5 +1,9 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import reducers from '../client/reducers'
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers
+} from 'redux'
+import reducers from './reducers'
 
 const combinedReducers = combineReducers(reducers)
 
