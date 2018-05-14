@@ -1,7 +1,7 @@
 #  IpAdressCodeAssessment
 
 
-Deployed project at http://ipAddress/miguelgimenez.tech 
+Deployed project at http://ipaddress.miguelgimenez.tech/
 
 ### Running the project
 
