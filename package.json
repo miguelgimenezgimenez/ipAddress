@@ -9,6 +9,19 @@
     "dev": "NODE_ENV=development parallelshell 'webpack --watch' 'nodemon server'",
     "test": "NODE_ENV=test jest src/tests/**/*.js"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "test"
+    ],
+    "coverageReporters": [
+      "html",
+      "text",
+      "text-summary"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

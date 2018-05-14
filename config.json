@@ -2,5 +2,9 @@
     "development" : {
         "serverUrl": "http://localhost:8000",
         "ipInfo": "https://ipinfo.io/?token=897b83d5886909"
+    },
+    "production" : {
+        "serverUrl": "http://159.65.90.211:8000",
+        "ipInfo": "https://ipinfo.io/?token=897b83d5886909"
     }
 }
